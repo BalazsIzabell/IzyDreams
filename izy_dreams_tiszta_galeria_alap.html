@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IzyDreams – Galéria</title>
+
+  <style>
+:root {
+  --bg:#f6f4f2;
+  --primary:#f2b8a2;
+  --secondary:#9c7fa6;
+  --text:#3b3330;
+  --card:#ffffff;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:"Segoe UI",system-ui,sans-serif;
+  color:var(--text);
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.6), transparent 45%),
+    linear-gradient(
+      135deg,
+      #f7d6df 0%,
+      #f4e3ec 35%,
+      #e9e7f5 65%,
+      #fdf6f9 100%
+    );
+
+  background-attachment: fixed;
+}
+
+
+header p{
+  font-style: italic;
+  opacity: .8;
+  text-align: center;
+  margin: 0.2rem 0 0.6rem;
+  font-size: 2rem;
+}
+
+
+header img{
+  max-width:220px;
+  margin:0 auto 0.4rem auto;
+  display:block;
+}
+
+
+
+.categories{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.6rem;
+  padding:0.4rem 1rem 1rem;
+}
+
+
+.categories button{
+  border:1px solid var(--primary);
+  background:linear-gradient(135deg,#fff,#fdf7f4);
+  color:var(--secondary);
+  padding:.55rem 1.25rem;
+  border-radius:999px;
+  cursor:pointer;
+  transition:.25s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+.categories button:hover,
+.categories button.active{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:#fff;
+}
+
+.grid{
+  max-width:1200px;
+  margin:auto;
+  padding:1.5rem 1rem 3rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:1.4rem;
+}
+
+.card{
+  background:var(--card);
+  border-radius:1.4rem;
+  overflow:hidden;
+  box-shadow:0 14px 30px rgba(0,0,0,.08);
+  cursor:pointer;
+  transition:.3s;
+  position:relative;
+}
+
+.card:hover{transform:scale(1.04)}
+
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.label{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:.8rem;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+}
+
+.hidden{display:none}
+
+details summary{
+  cursor:pointer;
+  font-weight:600;
+  margin-bottom:.5rem;
+}
+
+
+/* ===== FACEBOOK ÜZENET GOMB ===== */
+.fb-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  background: #1877f2;
+  color: #fff;
+  padding: .75rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: .9rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  z-index: 1000;
+  transition: .25s;
+}
+
+.fb-button:hover {
+  background: #145fd1;
+  transform: scale(1.05);
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('logo.png') center / 1100px no-repeat;
+  opacity:0.05;
+  pointer-events:none;
+  z-index:0;
+}
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="IzyDreams logó">
+  <p>Kézzel készült alkotások szeretettel</p>
+</header>
+
+<nav class="categories">
+  <button class="active" onclick="openHome()">Főoldal</button>
+  <button onclick="openCategory('babak')">Babáknak</button>
+  <button onclick="openCategory('gyerekek')">Gyerekeknek</button>
+  <button onclick="openCategory('nok')">Nőknek</button>
+  <button onclick="openCategory('zero')">Zero Waste</button>
+  <button onclick="openCategory('egyeb')">Egyéb</button>
+  <button onclick="openCategory('szezon')">Szezonális</button>
+  <button onclick="openGallery('azonnal')">Azonnal vihetők</button>
+</nav>
+
+<!-- ===== FŐOLDAL ===== -->
+<section id="home" class="grid">
+  <div class="card" onclick="openCategory('babak')"><img src="kepek/erdeizold.jpg"><div class="label">Babáknak</div></div>
+  <div class="card" onclick="openCategory('gyerekek')"><img src="kepek/focis.jpg"><div class="label">Gyerekeknek</div></div>
+  <div class="card" onclick="openCategory('nok')"><img src="kepek/bezsbor.jpg"><div class="label">Nőknek</div></div>
+  <div class="card" onclick="openCategory('zero')"><img src="kepek/kenyereszsakok.jpg"><div class="label">Zero Waste</div></div>
+  <div class="card" onclick="openCategory('egyeb')"><img src="kepek/egyeb.jpg"><div class="label">Egyéb</div></div>
+  <div class="card" onclick="openCategory('szezon')"><img src="kepek/szezon.jpg"><div class="label">Szezonális</div></div>
+  <div class="card" onclick="openGallery('azonnal')"><img src="kepek/azonnal.jpg"><div class="label">Azonnal vihetők</div></div>
+</section>
+
+<!-- ===== BABÁKNAK ===== -->
+<!-- ===== BABÁKNAK – ALKATEGÓRIÁK ===== -->
+<section id="babak" class="grid hidden">
+  <div class="card" onclick="openGallery('babak-kiskonyv')"><img src="kepek/Euborito.jpg"><div class="label">Egészségügyi kiskönyv borítók</div></div>
+  <div class="card" onclick="openGallery('babak-neszi')"><img src="kepek/erdeizold.jpg"><div class="label">Pelenkázó neszesszerek</div></div>
+  <div class="card" onclick="openGallery('babak-szundi')"><img src="kepek/jeges.jpg"><div class="label">Szundi kendők</div></div>
+</section>
+
+<!-- ===== GYEREKEKNEK – ALKATEGÓRIÁK ===== -->
+<section id="gyerekek" class="grid hidden">
+  <div class="card" onclick="openGallery('gyerek-ovi')"><img src="kepek/hercegnoszett.jpg"><div class="label">Bölcsis / Ovis szettek</div></div>
+  <div class="card" onclick="openGallery('gyerek-hati')"><img src="kepek/focis.jpg"><div class="label">Hátizsákok</div></div>
+  <div class="card" onclick="openGallery('gyerek-neszi')"><img src="kepek/COVER_gyerek_neszi.jpg"><div class="label">Neszesszerek</div></div>
+</section>
+
+<!-- ===== NŐKNEK – ALKATEGÓRIÁK ===== -->
+<section id="nok" class="grid hidden">
+  <div class="card" onclick="openGallery('nok-hati')"><img src="kepek/COVER_nok_hati.jpg"><div class="label">Hátizsákok</div></div>
+  <div class="card" onclick="openGallery('nok-neszi')"><img src="kepek/bezsbor.jpg"><div class="label">Neszesszerek</div></div>
+  <div class="card" onclick="openGallery('nok-arct')"><img src="kepek/Arc.jpg"><div class="label">Arctisztító szettek</div></div>
+</section>
+
+<!-- ===== ZERO WASTE – ALKATEGÓRIÁK ===== -->
+<section id="zero" class="grid hidden">
+  <div class="card" onclick="openGallery('zero-kenyer')"><img src="kepek/Kenyereszsakok.jpg"><div class="label">Kenyeres zsákok</div></div>
+  <div class="card" onclick="openGallery('zero-szalv')"><img src="kepek/COVER_zero_szalv.jpg"><div class="label">Újraszalvéták</div></div>
+  <div class="card" onclick="openGallery('zero-zsebi')"><img src="kepek/zsebkendo.jpg"><div class="label">Textil zsebkendők</div></div>
+</section>
+
+<!-- ===== EGYÉB – ALKATEGÓRIÁK ===== -->
+<section id="egyeb" class="grid hidden">
+  <div class="card" onclick="openGallery('egyeb-konyv')"><img src="kepek/univerzalis.jpg"><div class="label">Univerzális könyvborítók</div></div>
+  <div class="card" onclick="openGallery('egyeb-tolltarto')"><img src="kepek/tolltarto.jpg"><div class="label">Tolltartók noteszre</div></div>
+</section>
+
+<!-- ===== SZEZONÁLIS – ALKATEGÓRIÁK ===== -->
+<section id="szezon" class="grid hidden">
+  <div class="card" onclick="openGallery('szezon-mikulas')"><img src="kepek/mikulas.jpg"><div class="label">Mikulásra</div></div>
+  <div class="card" onclick="openGallery('szezon-husvet')"><img src="kepek/husvet.jpg"><div class="label">Húsvétra</div></div>
+</section>
+
+<!-- ===== GALÉRIA ===== -->
+<section id="gallery" class="grid hidden">
+  <div style="grid-column:1 / -1; text-align:left; margin-bottom:1rem;">
+    <button onclick="goBack()" style="border:1px solid var(--primary); background:#fff; color:var(--secondary); padding:.45rem 1rem; border-radius:999px; cursor:pointer;">← Vissza</button>
+  </div>
+  <!-- TERMÉKKÉPEK IDE -->
+</section>
+
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+  <img id="lightboxImg" src="">
+</div>
+
+<script>
+const sections = ['home','babak','gyerekek','nok','zero','egyeb','szezon','gallery'];
+let currentSection = 'home';
+let lastSection = 'home';
+
+function hideAll(){ sections.forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.add('hidden'); }); }
+
+function openHome(){ hideAll(); currentSection='home'; document.getElementById('home').classList.remove('hidden'); }
+
+function openCategory(id){ hideAll(); currentSection=id; document.getElementById(id).classList.remove('hidden'); }
+
+function openGallery(category){ hideAll(); lastSection=currentSection; const g=document.getElementById('gallery'); g.innerHTML=g.innerHTML.split('<!-- TERMÉKKÉPEK IDE -->')[0]+'<!-- TERMÉKKÉPEK IDE -->'; document.querySelectorAll(`[data-gallery="${category}"]`).forEach(c=>g.appendChild(c.cloneNode(true))); g.classList.remove('hidden'); }
+
+function goBack(){ hideAll(); document.getElementById(lastSection).classList.remove('hidden'); currentSection=lastSection; }
+</script>
+
+
+<!-- ===== FACEBOOK OLDAL GOMB ===== -->
+<a href="https://www.facebook.com/profile.php?id=100065407152362" target="_blank" class="fb-button">
+  💬 Messenger üzenet
+</a>
+
+</body>
+</html>
